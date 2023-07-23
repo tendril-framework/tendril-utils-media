@@ -1,5 +1,6 @@
 
 
+import re
 import warnings
 from math import ceil
 from typing import List
@@ -66,12 +67,17 @@ class VideoFileInfoParser(MediaFileInfoParser):
         return rv
 
     def _parse_av_track_information(self, track: Track):
+        # TODO Figure out what this actually is.
+        ss = track.stream_size
+        if isinstance(ss, str):
+            result = [e for e in re.split("[^0-9]", ss) if e != '']
+            ss = max(map(int, result))
         rv = {
             'format': track.format,
             'codec_id': track.codec_id,
             'duration': track.duration,
             'bit_rate': track.bit_rate,
-            'stream_size': track.stream_size,
+            'stream_size': ss,
             'encoded_date': track.encoded_date,
             'tagged_date': track.tagged_date
         }

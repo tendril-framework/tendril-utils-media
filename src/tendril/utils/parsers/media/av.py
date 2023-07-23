@@ -57,9 +57,9 @@ class VideoTrackInfo(AVTrackInfo):
 class AudioTrackInfo(AVTrackInfo):
     format_additionalfeatures: Optional[str]    # Missing in Vorbis
     muxing_mode: Optional[str]                  # Missing in multiple
-    channels: int
+    channels: Optional[int]
     channel_layout: Optional[str]               # Missing in Vorbis
-    sampling_rate: int
+    sampling_rate: Optional[int]
     compression_mode: Optional[str]             # Missing in WMV
     encoded_date: Optional[str]
     tagged_date: Optional[str]
