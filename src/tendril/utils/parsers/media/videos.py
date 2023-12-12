@@ -118,6 +118,9 @@ class VideoFileInfoParser(MediaFileInfoParser):
         return rv
 
     def _parse_audio_information(self, mi, fname=None):
+        if not len(mi.audio_tracks):
+            warnings.warn(f"Got no usable Audio Tracks for Audio File f{fname}")
+            return []
         if len(mi.audio_tracks) > 1:
             warnings.warn(f"Got multiple Audio Tracks for Video File f{fname}")
         audio_track = mi.audio_tracks[0]
